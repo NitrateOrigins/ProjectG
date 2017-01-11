@@ -1,22 +1,24 @@
 @echo off
-title FARMING SIMULATION [1.0.0 b1]
+set ver=1.0.0.1
+set title=Farming Sim
+title %title% [v%ver%]
 color c
 ::  1   .   0   .    0    .   0    || versions
 ::major | minor | bug fix | build  || versions
 
-:startup
+:boot
 cls
-echo WELCOME TO FARMING SIMULATION [v1.0.0 b1]!
+echo Welcome to %title% [v%ver%]!
 echo.
 echo.
-echo WHAT IS YOUR PREFERRED USER NAME?
-echo OR USER NAME IF YOU ALREADY HAVE ONE.
-set /p player_name=USER NAME: 
+echo What is your preferred username?
+echo If you already have one, use that.
+set /p player_name=Username: 
 echo.
 echo.
 if exist %player_name%.sav (
 for /f %%a in (%player_name%.sav) do set %%a
-goto startc
+goto old
 ) else (
 ( echo ) >> %player_name%.sav
 set /a money=1200
@@ -37,38 +39,57 @@ set /a pig=0
 set /a horse=0
 set /a cow=0
 set /a chicken=0
-goto done
+goto new
 )
 goto save
 ::####
 
-:startc
+:old
 cls
-echo WELCOME BACK, %player_name%!
+echo Welcome back, %player_name%!
 echo.
 echo.
-echo YOUR CURRENT STATUS:
-echo MONEY: $%money%
-echo LEVEL: %lvl%
-echo EXP: %xp%
+echo Your current status:
+echo Money: $%money%
+echo Level: %lvl%
+echo Exp: %xp%
 echo.
 echo.
-echo I HOPE YOU ARE ENJOYING THE GAME!
-echo PRESS 'ENTER' TO START PLAYING.
+echo Thanks for playing!
+echo Press 'enter' to continue playing.
 pause >nul
 goto menu
 
 :done
 cls
-echo YOU ARE NOW A PLAYER!
+echo Account successfully set up!
 echo.
 echo.
-echo I HOPE YOU WILL ENJOY THE GAME!
-echo PRESS 'ENTER' TO START PLAYING.
+echo Enjoy the game!
+echo Press 'enter' to start playing.
 pause >nul
 goto menu
 
+:levelup
+cls
+
+if %xp%==100 (
+cls
+echo	MONEY: $%money%    NAME: %player_name%    LEVEL: %lvl%    EXP: %xp%
+echo.
+echo.
+echo You leveled up!
+set /a xp=0
+set /a lvl=%lvl%+1
+echo.
+echo.
+echo YOU ARE NOW LEVEL %lvl%!
+pause >nul
+goto %crrp%
+)
+
 :menu
+set crrp=menu
 cls
 
 (del %player_name%.sav)
@@ -95,23 +116,6 @@ cls
 (echo cpen=%cpen%)>> %player_name%.sav
 (echo hpen=%hpen%)>> %player_name%.sav
 (echo chpen=%chpen%)>> %player_name%.sav
-
-cls
-
-if %xp%==100 (
-cls
-echo	MONEY: $%money%    NAME: %player_name%    LEVEL: %lvl%    EXP: %xp%
-echo.
-echo.
-echo YOU LEVELED UP!
-set /a xp=0
-set /a lvl=%lvl%+1
-echo.
-echo.
-echo YOU ARE NOW LEVEL %lvl%!
-pause >nul
-goto menu
-)
 
 cls
 echo	MONEY: $%money%    NAME: %player_name%    LEVEL: %lvl%    EXP: %xp%
