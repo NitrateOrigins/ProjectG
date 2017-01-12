@@ -72,10 +72,7 @@ goto menu
 
 :levelup
 cls
-
-if %xp%==100 (
-cls
-echo	MONEY: $%money%    NAME: %player_name%    LEVEL: %lvl%    EXP: %xp%
+echo	Money: $%money%    Name: %player_name%    Level: %lvl%    Exp: %xp%
 echo.
 echo.
 echo You leveled up!
@@ -83,10 +80,11 @@ set /a xp=0
 set /a lvl=%lvl%+1
 echo.
 echo.
-echo YOU ARE NOW LEVEL %lvl%!
+echo You are now level %lvl%!
 pause >nul
 goto %crrp%
-)
+echo Error in code! Please report this! Error Code: 5124
+goto menu
 
 :menu
 set crrp=menu
@@ -118,18 +116,18 @@ cls
 (echo chpen=%chpen%)>> %player_name%.sav
 
 cls
-echo	MONEY: $%money%    NAME: %player_name%    LEVEL: %lvl%    EXP: %xp%
+echo	Money: $%money%    Name: %player_name%    Level: %lvl%    Exp: %xp%
 echo.
 echo.
-echo ENTER A NUMBER:
-echo 1) SAVE AND QUIT!
-echo 2) INVENTORY!
-echo 3) SELL!
-echo 4) MARKET!
-echo 5) YOUR FARM!
+echo Enter a number:
+echo 1) Save and quit.
+echo 2) Inventory.
+echo 3) Sell.
+echo 4) Market.
+echo 5) Your farm.
 echo.
 echo.
-set /p menu=CHOICE: 
+set /p menu=Your choice: 
 echo.
 echo.
 if %menu%==1 goto save
