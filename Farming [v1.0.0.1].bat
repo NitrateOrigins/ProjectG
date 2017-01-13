@@ -137,15 +137,16 @@ if %menu%==4 goto store
 if %menu%==5 goto farm
 echo.
 echo.
-echo YOU MUST ENTER 1, 2, 3, 4 OR 5!
+echo You must enter '1', '2', '3', '4' OR '5'!
 pause >nul
 goto menu
 
 
 :store
+set crrp=store
 cls
 
-if %xp%==100 goto menu
+if %xp% GTR 100 goto levelup
 if %money% LSS 0 (
 set /a money=0
 goto fail
@@ -159,29 +160,25 @@ set /a chpen=%chpen%+0
 cls
 set /a ropes=%ropes%+0
 set /a land=%land%+0
-echo	MONEY: $%money%    NAME: %player_name%    LEVEL: %lvl%    EXP: %xp%
+echo	Money: $%money%    Name: %player_name%    Level: %lvl%    Exp: %xp%
 echo.
 echo.
-echo ==================== WHAT TO BUY ====================:=== YOUR STASH ===
-echo BUY WHEAT SEEDS: $5 FOR 5 SEEDS [TYPE 'wheat']       ; WHEAT SEEDS: %wheat%
-echo BUY RICE SEEDS: $10 FOR 5 SEEDS [TYPE 'rice']        ; RICE SEEDS: %rice%
-echo BUY MORE LAND: $100 FOR 1 ACRE SQUARED [TYPE 'land'] ; LAND OWNED: %land%
-echo BUY BALE ROPE: $10 FOR 5 ROPES [TYPE 'ropes']        ; ROPES OWNED: %ropes%
-echo BUY WATERING CAN: $50 FOR 1 CAN [TYPE 'can']         ; WATERING CANS: %wac%
-echo BUY PIG: $20 FOR 1 PIG [TYPE 'pig']                  ; PIGS OWNED: %pig%
-echo BUY COW: $50 FOR 1 COW [TYPE 'cow']                  ; COWS OWNED: %cow%
-echo BUY HORSE: $1000 FOR 1 HORSE [TYPE 'horse']          ; HORSES OWNED: %horse%
-echo BUY CHICKEN: $10 FOR 2 CHICKENS [TYPE 'chicken']     ; CHICKENS: %chicken%
+echo ==================== What to buy ====================:=== Your Stash ===
+echo Buy wheat seeds: $5 for 5 seeds [type 'wheat']       ; Wheat seeds: %wheat%
+echo Buy rice seeds: $10 for 5 seeds [type 'rice']        ; Rice seeds: %rice%
+echo Buy more land: $100 for 1 acre squared [type 'land'] ; Land owned: %land%
+echo Buy bale rope: $10 for 5 ropes [type 'ropes']        ; Ropes owned: %ropes%
+echo Buy watering can: $50 for 1 can [type 'can']         ; Watering cans: %wac%
+echo Buy pig: $20 for 1 pig [type 'pig']                  ; Pigs owned: %pig%
+echo Buy cow: $50 for 1 cow [type 'cow']                  ; Cows owned: %cow%
+echo Buy horse: $1000 for 1 horse [type 'horse']          ; Horses owned: %horse%
+echo Buy chicken: $10 for 2 chickens [type 'chicken']     ; Chickens: %chicken%
 echo.
-echo TYPE 'back' TO GO BACK TO THE MENU.
+echo Type 'back' to return to the menu.
 echo.
-set /p store=I WANT TO BUY: 
-if %store%==back (
-echo.
-echo PRESS 'ENTER' TO GO TO THE MENU.
-pause >nul
-goto menu
-)
+set /p store=My choice: 
+if %store%==back goto menu
+
 if %store%==pig goto bpig
 
 if %store%==cow goto bcow
@@ -201,34 +198,35 @@ if %store%==can goto bwac
 if %store%==ropes goto bropes
 
 echo.
-echo INVALID ENTERY!
+echo Invalid entery!
 echo.
 echo.
-echo PRESS 'ENTER'.
+echo Press 'enter' to try again.
 pause >nul
 goto store
 pause >nul
 goto menu
 
 :bpig
-if %money% GTR 20 (
+if %money% GTR 19 (
 if %ppen% LSS 20 (
 set /a pig=%pig%+1
 set /a ppen=%ppen%+1
 set /a money=%money%-20
 set /a xp=%xp%+20
-if %xp% GTR 100 (
+if %xp% GTR 99 (
 set /a lvl=%lvl%+1
 set /a xp=%xp%-100
-)
-if %xp%==100 goto menu
 echo.
-echo SUCESSFULLY BOUGHT!
+echo You leveled up to level %lvl%!
+)
+echo.
+echo Successfully bought!
 pause >nul
 goto store
 ) else (
 echo.
-echo HEY! YOUR PIG PEN IS FULL!
+echo Hey! Your pig pen is full!
 pause >nul
 goto store
 )
@@ -242,24 +240,25 @@ set /a cow=%cow%+1
 set /a cpen=%cpen%+1
 set /a money=%money%-50
 set /a xp=%xp%+50
-if %xp% GTR 100 (
+if %xp% GTR 99 (
 set /a lvl=%lvl%+1
 set /a xp=%xp%-100
-)
-if %xp%==100 goto menu
 echo.
-echo SUCESSFULLY BOUGHT!
+echo You leveled up to level %lvl%!
+pause >nul
+)
+echo.
+echo Successfully bought!
 pause >nul
 goto store
 ) else (
 echo.
-echo HEY! YOUR COW PEN IS FULL!
+echo Hey! Your cow pen is full!
 pause >nul
 goto store
 )
 )
 goto fail
-
 
 :bhorse
 if %money% GTR 999 (
@@ -269,12 +268,14 @@ set /a hpen=%hpen%+1
 set /a money=%money%-1000
 set /a lvl=%lvl%+2
 echo.
-echo SUCESSFULLY BOUGHT!
+echo You leveled up to level %lvl%!
+echo.
+echo Successfully bought!
 pause >nul
 goto store
 ) else (
 echo.
-echo HEY! YOUR HORSE PEN IS FULL!
+echo Hey! Your horse pen is full!
 pause >nul
 goto store
 )
@@ -288,17 +289,19 @@ set /a chicken=%chicken%+2
 set /a chpen=%chpen%+1
 set /a money=%money%-10
 set /a xp=%xp%+10
-if %xp% GTR 100 (
+if %xp% GTR 99 (
 set /a lvl=%lvl%+1
 set /a xp=%xp%-100
+echo.
+echo You leveled up to level %lvl%!
 )
 echo.
-echo SUCESSFULLY BOUGHT!
+echo Successfully bought!
 pause >nul
 goto store
 ) else (
 echo.
-echo HEY! YOUR CHICKEN PEN IS FULL!
+echo Hey! Your chicken pen is full!
 pause >nul
 goto store
 )
@@ -310,13 +313,14 @@ if %money% GTR 4 (
 set /a wheat=%wheat%+5
 set /a money=%money%-5
 set /a xp=%xp%+3
-if %xp% GTR 100 (
+if %xp% GTR 99 (
 set /a lvl=%lvl%+1
 set /a xp=%xp%-100
-)
-if %xp%==100 goto menu
 echo.
-echo SUCESSFULLY BOUGHT!
+echo You have leveled up to level %lvl%!
+)
+echo.
+echo Successfully bought!
 pause >nul
 goto store
 )
@@ -327,13 +331,14 @@ if %money% GTR 9 (
 set /a rice=%rice%+5
 set /a money=%money%-10
 set /a xp=%xp%+5
-if %xp% GTR 100 (
+if %xp% GTR 99 (
 set /a lvl=%lvl%+1
 set /a xp=%xp%-100
-)
-if %xp%==100 goto menu
 echo.
-echo SUCESSFULLY BOUGHT!
+echo You have leveled up to level %lvl%!
+)
+echo.
+echo Successfully bought!
 pause >nul
 goto store
 )
@@ -344,7 +349,8 @@ if %money% GTR 99 (
 if %lvl%= LSS 4 (
 if %land%==4 (
 echo.
-echo REACH LEVEL 4 TO GET UP TO 16 PLOTS!
+echo Hey! You are not of a high enough level to buy this!
+echo Reach level 4 to get up to 16 plots!
 pause >nul
 goto store
 )
@@ -352,9 +358,8 @@ goto store
 if %lvl% LSS 10 (
 if %land%==16 (
 echo.
-echo YOU HAVE REACHED YOUR MAXIMUM FARMLAND LIMIT FOR YOUR LEVEL!
-echo.
-echo REACH LEVEL 10 TO HAVE UP TO 36 PLOTS!
+echo Hey! You are not of a high enough level to buy this!
+echo Reach level 10 to get up to 36 plots!
 pause >nul
 goto store
 )
@@ -362,31 +367,31 @@ goto store
 if %lvl% LSS 50 (
 if %land%==36 (
 echo.
-echo YOU HAVE REACHED YOUR MAXIMUM FARMLAND LIMIT FOR YOUR LEVEL!
-echo.
-echo REACH LEVEL 100 TO HAVE UP TO 100 PLOTS!
+echo Hey! You are not of a high enough level to buy this!
+echo Reach level 100 to get up to 100 plots!
 pause >nul
 goto store
 )
 )
-if %lvl% LSS 100 (
 if %land%==100 (
 echo.
-echo YOU HAVE REACHED THE MAXIMUM LIMIT FOR PLOTS!
+echo You have reached the maximum plot limit!
+echo Maximum plot limit might be removed in a further update.
 pause >nul
 goto store
 )
-) 
 set /a land=%land%+1
 set /a money=%money%-100
 set /a xp=%xp%+70
-if %xp% GTR 100 (
+if %xp% GTR 99 (
 set /a lvl=%lvl%+1
 set /a xp=%xp%-100
+echo.
+echo You have leveled up to level %lvl%!
 )
 if %xp%==100 goto menu
 echo.
-echo SUCESSFULLY BOUGHT!
+echo Successfully bought!
 pause >nul
 goto store
 )
@@ -397,13 +402,14 @@ if %money% GTR 49 (
 set /a wac=%wac%+1
 set /a money=%money%-50
 set /a xp=%xp%+30
-if %xp% GTR 100 (
+if %xp% GTR 99 (
 set /a lvl=%lvl%+1
 set /a xp=%xp%-100
-)
-if %xp%==100 goto menu
 echo.
-echo SUCESSFULLY BOUGHT!
+echo You have leveled up to level %lvl%!
+)
+echo.
+echo Successfully bought!
 pause >nul
 goto store
 )
@@ -414,35 +420,38 @@ if %money% GTR 9 (
 set /a ropes=%ropes%+5
 set /a money=%money%-10
 set /a xp=%xp%+1
-if %xp% GTR 100 (
+if %xp% GTR 99 (
 set /a lvl=%lvl%+1
 set /a xp=%xp%-100
-)
-if %xp%==100 goto menu
 echo.
-echo SUCESSFULLY BOUGHT!
+echo You have leveled up to level %lvl%!
+)
+echo.
+echo Successfully bought!
 pause >nul
 goto store
 )
 goto fail
 
 :fail
+set crrp=fail
 cls
-if %xp%==100 goto menu
+if %xp%==100 goto level up
 cls
-echo	MONEY: $%money%    NAME: %player_name%    LEVEL: %lvl%    EXP: %xp%
+echo	Money: $%money%    Name: %player_name%    Level: %lvl%    Exp: %xp%
 echo.
 echo.
-echo PUT THAT DOWN!
-echo YOU DON'T HAVE ENOUGH MONEY TO BUY THAT!
+echo Put that down!
+echo You don't have enough money to buy that!
 pause >nul
 goto menu
 
 :inv
+set crrp=%inv%
 cls
-if %xp%==100 goto menu
+if %xp%==100 goto levelup
 cls
-echo	MONEY: $%money%    NAME: %player_name%    LEVEL: %lvl%    EXP: %xp%
+echo	Money: $%money%    Name: %player_name%    Level: %lvl%    Exp: %xp%
 echo.
 echo.
 echo ======================= YOUR INVENTORY =======================
