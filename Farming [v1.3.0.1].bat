@@ -863,7 +863,7 @@ if %farm%==4 goto map
 if %farm%==5 goto stable
 if %farm%==6 goto menu
 echo.
-echo ERROR! TRY AGAIN!
+echo Error! Try again!
 pause >nul
 goto farm
 
@@ -880,7 +880,7 @@ set /a space=%land%-%plants%
 
 cls
 
-set p=404
+if [%p%] == [] set p=rice
 
 if %space%==0 (
 echo	Money: $%money%    Name: %player_name%    Level: %lvl%    Exp: %xp%
@@ -1150,6 +1150,7 @@ if %pv% LSS 10 (
 set /a pv=%pv%+1
 )
 set /a pnet=%pv%+%pfat%
+if pnet LEQ 20 set /a pnet=20
 cls
 echo	Money: $%money%    Name: %player_name%    Level: %lvl%    Exp: %xp%
 echo.
@@ -1162,7 +1163,8 @@ echo Type 'feed' to feed all pigs two carrots.
 echo Type 'back' to return to stable.
 set /p po=I want to: 
 if %po%==feed (
-if %carrot% GTR 2*%pig%-1 (
+set /a pigfeed=2*%pig%
+if %carrot% GEQ %pigfeed% (
 set /a pfat=%pfat%+5
 set /a carrot=%carrot%-2*%pig%
 echo.
@@ -1197,6 +1199,7 @@ if %hv% LSS 20 (
 set /a hv=%hv%+1
 )
 set /a hnet=%hv%+%hfat%
+if hnet LEQ 1000 set /a hnet=1000
 cls
 echo	Money: $%money%    Name: %player_name%    Level: %lvl%    Exp: %xp%
 echo.
@@ -1209,7 +1212,7 @@ echo Type 'feed' to feed all horses one wheat bale.
 echo Type 'back' to return to stable.
 set /p ho=I want to: 
 if %ho%==feed (
-if %wbale% GTR %horse%-1 (
+if %wbale% GEQ %horse% (
 set /a hfat=%hfat%+2
 set /a wbale=%wbale%-%horse%
 echo.
@@ -1244,6 +1247,7 @@ if %cv% LSS 10 (
 set /a cv=%cv%+1
 )
 set /a cnet=%cv%+%cfat%
+if cnet LEQ 50 set /a cnet=50
 cls
 echo	Money: $%money%    Name: %player_name%    Level: %lvl%    Exp: %xp%
 echo.
@@ -1256,7 +1260,7 @@ echo Type 'feed' to feed all cows one wheat bale.
 echo Type 'back' to return to stable.
 set /p co=I want to: 
 if %co%==feed (
-if %wbale% GTR %cow%-1 (
+if %wbale% GEQ %cow% (
 set /a cfat=%cfat%+3
 set /a wbale=%wbale%-%cow%
 echo.
@@ -1291,6 +1295,7 @@ if %chv% LSS 10 (
 set /a cv=%chv%+1
 )
 set /a chnet=%chv%+%chfat%
+if chnet LEQ 5 set /a chnet=5
 cls
 echo	Money: $%money%    Name: %player_name%    Level: %lvl%    Exp: %xp%
 echo.
@@ -1303,7 +1308,7 @@ echo Type 'feed' to feed all chickens one wheat seed.
 echo Type 'back' to return to stable.
 set /p cho=I want to: 
 if %cho%==feed (
-if %wheat% gtr %chicken%-1 (
+if %wheat% GEQ %chicken% (
 set /a chfat=%chfat%+3
 set /a wheat=%wheat%-%chicken%
 echo.
