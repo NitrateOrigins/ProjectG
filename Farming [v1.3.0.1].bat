@@ -741,6 +741,7 @@ set /a xp=%xp%-100
 set /a lvl=%lvl%+1
 )
 set /a money=%money%+%cnet%
+if %cpen%==0 set /a cfat=0
 pause >nul
 goto sell
 )
@@ -768,6 +769,7 @@ set /a xp=%xp%-100
 set /a lvl=%lvl%+1
 )
 set /a money=%money%+%pnet%
+if %ppen%==0 set /a pfat=0
 pause >nul
 goto sell
 )
@@ -791,6 +793,7 @@ set /a hpen=%hpen%-1
 set /a ho=0
 set /a lvl=%lvl%+1
 set /a money=%money%+%hnet%
+if %hpen%==0 set /a hfat=0
 pause >nul
 goto sell
 )
@@ -814,6 +817,7 @@ set /a chpen=%chpen%-1
 set /a ch=0
 set /a xp=%xp%+2
 set /a money=%money%+%chnet%
+if %chpen%==0 set /a chfat=0
 pause >nul
 goto sell
 )
@@ -984,7 +988,7 @@ set topic=hc
 if %xp%==100 goto menu
 cls
 
-set hc=404
+set hc=harvest
 
 set /a tim=%tim%+0
 echo.
@@ -1007,7 +1011,7 @@ echo.
 set /p hc=I want to: 
 if %hc%==harvest (
 if %tim%==3 (
-if %ropes% GTR %whp%+%rip%-1 (
+if %ropes% GEQ %whp%+%rip% (
 set /a wbale=%wbale%+%whp%
 set /a whp=0
 set /a rbale=%rbale%+%rip%
