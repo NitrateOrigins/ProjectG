@@ -9,7 +9,7 @@ title="Farming Simulation [v"$ver"]"
 # major | minor | bug fix | build || versions
 
 function startup() {
-    player_name=Error 404
+    player_name="Error 404"
     clear
     echo Welcome to $title"!"
     echo ""
@@ -51,25 +51,25 @@ function startup() {
 #####
 
 function wb() {
-    money=$money+0
-    lvl=$lvl+0
-    xp=$xp+0
-    tim=$tim+0
-    land=$land+0
-    wac=$wac+0
-    whp=$whp+0
-    rip=$rip+0
-    wbale=$wbale+0
-    rbale=$rbale+0
-    ropes=$ropes+0
-    rice=$rice+0
-    wheat=$wheat+0
-    plants=$plants+0
-    pig=$pig+0
-    horse=$horse+0
-    cow=$cow+0
-    chicken=$chicken+0
-    carrot=$carrots+0
+    let "$money += 0"
+    let "$lvl += 0"
+    let "$xp += 0"
+    let "$tim += 0"
+    let "$land += 0"
+    let "$wac += 0"
+    let "$whp += 0"
+    let "$rip += 0"
+    let "$wbale += 0"
+    let "$rbale += 0"
+    let "$ropes += 0"
+    let "$rice += 0"
+    let "$wheat += 0"
+    let "$plants += 0"
+    let "$pig += 0"
+    let "$horse += 0"
+    let "$cow += 0"
+    let "$chicken += 0"
+    let "$carrots += 0"
 
     clear
     echo Welcome back to $title", "$player_name"!"
