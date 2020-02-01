@@ -17,7 +17,7 @@ function startup() {
     echo What is your preferred username?
     echo Or enter your current username.
     echo You cannot have any spaces in your name!
-    read player_name -p "Username: " 
+    read -p "Username: " player_name
     echo ""
     echo ""
     if [ -f $player_name".sav" ]; then
@@ -51,25 +51,25 @@ function startup() {
 #####
 
 function wb() {
-    let "$money += 0"
-    let "$lvl += 0"
-    let "$xp += 0"
-    let "$tim += 0"
-    let "$land += 0"
-    let "$wac += 0"
-    let "$whp += 0"
-    let "$rip += 0"
-    let "$wbale += 0"
-    let "$rbale += 0"
-    let "$ropes += 0"
-    let "$rice += 0"
-    let "$wheat += 0"
-    let "$plants += 0"
-    let "$pig += 0"
-    let "$horse += 0"
-    let "$cow += 0"
-    let "$chicken += 0"
-    let "$carrots += 0"
+    let "money += 0"
+    let "lvl += 0"
+    let "xp += 0"
+    let "tim += 0"
+    let "land += 0"
+    let "wac += 0"
+    let "whp += 0"
+    let "rip += 0"
+    let "wbale += 0"
+    let "rbale += 0"
+    let "ropes += 0"
+    let "rice += 0"
+    let "wheat += 0"
+    let "plants += 0"
+    let "pig += 0"
+    let "horse += 0"
+    let "cow += 0"
+    let "chicken += 0"
+    let "carrots += 0"
 
     clear
     echo Welcome back to $title", "$player_name"!"
@@ -141,7 +141,7 @@ function menu() {
         echo ""
         echo You leveled up!
         xp=0
-        let "$lvl += 1"
+        let "lvl += 1"
         echo ""
         echo ""
         echo You are now level $lvl!
@@ -164,7 +164,7 @@ function menu() {
     echo "5) Your farm!"
     echo ""
     echo ""
-    read menu -p "Choice: "
+    read -p "Choice: " menu
     echo ""
     echo ""
     if [ $menu == 1 ]; then save; fi
@@ -189,14 +189,14 @@ function store() {
         fail
     fi
     if [ $money -lt 5 ]; then fail; fi
-    let "$ppen += 0"
-    let "$cpen += 0"
-    let "$hpen += 0"
-    let "$chpen += 0"
+    let "ppen += 0"
+    let "cpen += 0"
+    let "hpen += 0"
+    let "chpen += 0"
 
     clear
-    let "$ropes += 0"
-    let "$land += 0"
+    let "ropes += 0"
+    let "land += 0"
     echo "	Money: \$"$money"    Name: "$player_name"    Level: "$lvl"    Exp: "$xp
     echo ""
     echo ""
@@ -214,7 +214,7 @@ function store() {
     echo ""
     echo "Type \'back\' to go back to the menu."
     echo ""
-    read store -p "I want to to buy: "
+    read -p "I want to to buy: " store
     if [ $store == "back" ]; then
         echo ""
         echo Press \'enter\' to go back to the menu.
@@ -256,13 +256,13 @@ function bpig() {
     topic=store
     if [ $money -gt 20 ]; then
 		if [ $ppen -lt 20 ]; then
-			let "$pig += 1"
-			let "$ppen += 1"
-			let "$money -= 20"
-			let "$xp += 20"
+			let "pig += 1"
+			let "ppen += 1"
+			let "money -= 20"
+			let "xp += 20"
 			while [ $xp -gt 100 ]; do
-				let "$lvl += 1"
-				let "$xp -= 100"
+				let "lvl += 1"
+				let "xp -= 100"
 			done
 			if [ $xp == 100 ]; then menu; fi
 			echo ""
@@ -283,13 +283,13 @@ function bcow() {
 topic=store
 	if [ $money -gt 49 ]; then
 		if [ $cpen -lt 20 ]; then
-			let "$cow += 1"
-			let "$cpen += 1"
-			let "$money -= 50"
-			let "$xp += 50"
+			let "cow += 1"
+			let "cpen += 1"
+			let "money -= 50"
+			let "xp += 50"
 			while [ $xp -gt 100 ]; do
-				let "$lvl += 1"
-				let "$xp -= 100"
+				let "lvl += 1"
+				let "xp -= 100"
 			done
 			if [ $xp ==100 ]; then menu; fi
 			echo ""
@@ -310,10 +310,10 @@ function bhorse() {
 	topic=store
 	if [ $money -gt 999 ]; then
 		if [ $hpen -lt 10 ]; then
-			let "$horse += 1"
-			let "$hpen += 1"
-			let "$money -= 1000"
-			let "$lvl += 2"
+			let "horse += 1"
+			let "hpen += 1"
+			let "money -= 1000"
+			let "lvl += 2"
 			echo ""
 			echo Successfully bought a horse!
 			read q
@@ -332,13 +332,13 @@ function bchicken() {
 	topic=store
 	if [ $money -gt 9 ]; then
 		if [ $chpen -lt 50 ]; then
-			let "$chicken += 2"
-			let "$chpen += 2"
-			let "$money -= 10"
-			let "$xp += 10"
+			let "chicken += 2"
+			let "chpen += 2"
+			let "money -= 10"
+			let "xp += 10"
 			while [ $xp -gt 100 ]; do
-				let "$lvl += 1"
-				let "$xp -= 100"
+				let "lvl += 1"
+				let "xp -= 100"
 			done
 			echo ""
 			echo Successfully bought two chickens!
@@ -357,12 +357,12 @@ function bchicken() {
 function bwheat() {
 	topic=store
 	if [ $money -gt 4 ]; then
-		wheat=$wheat+5
-		money=$money-5
-		xp=$xp+3
+		let "wheat += 5"
+		let "money -= 5"
+		let "xp += 3"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
 		if [ $xp == 100 ]; then menu; fi
 		echo ""
@@ -376,12 +376,12 @@ function bwheat() {
 function brice() {
 	topic=store
 	if [ $money -gt 9 ]; then
-		rice=$rice+5
-		money=$money-10
-		xp=$xp+5
+		let "rice += 5"
+		let "money -= 10"
+		let "xp += 5"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
 		if [ $xp ==100 ]; then menu; fi
 		echo ""
@@ -433,12 +433,12 @@ function bland() {
 				store
 			fi
 		fi
-		land=$land+1
-		money=$money-100
-		xp=$xp+70
+		let "land += 1"
+		let "money -= 100"
+		let "xp += 70"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
 		if [ $xp == 100 ]; then menu; fi
 		echo ""
@@ -452,12 +452,12 @@ function bland() {
 function bwac() {
 	topic=store
 	if [ $money -gt 49 ]; then
-		wac=$wac+1
-		money=$money-50
-		xp=$xp+30
+		let "wac += 3"
+		let "money -= 50"
+		let "xp += 30"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
 		if [ $xp == 100 ]; then menu; fi
 		echo ""
@@ -471,12 +471,12 @@ function bwac() {
 function bropes() {
 	topic=store
 	if [ $money -gt 9 ]; then
-		ropes=$ropes+5
-		money=$money-10
-		xp=$xp+3
+		let "ropes += 5"
+		let "money -= 10"
+		let "xp += 3"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
 		if [ $xp == 100 ]; then menu; fi
 		echo ""
@@ -490,12 +490,12 @@ function bropes() {
 function bcarr() {
 	topic=store
 	if [ $money -gt 9 ]; then
-		carrot=$carrot+5
-		money=$money-5
-		xp=$xp+3
+		let "carrot += 5"
+		let "money -= 5"
+		let "xp += 3"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
 		if [ $xp == 100 ]; then menu; fi
 		echo ""
@@ -594,13 +594,13 @@ function swheat() {
 		sell
 	else
 		echo Wheat seed sold successfully!
-		wheat=$wheat-1
-		xp=$xp+2
+		let "wheat -= 1"
+		let "money += 2"
+		let "xp += 2"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
-		money=$money+2
 		read q
 		sell
 	fi
@@ -620,13 +620,13 @@ function srice() {
 		sell
 	else
 		echo Rice seed sold successfully!
-		rice=$rice-1
-		xp=$xp+2
+		let "rice -= 1"
+		let "money += 2"
+		let "xp += 2"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
-		money=$money+2
 		read q
 		sell
 	fi
@@ -646,13 +646,13 @@ function swbale() {
 		sell
 	else
 		echo Wheat bale sold successfully!
-		wbale=$wbale-1
-		xp=$xp+2
+		let "wbale -= 1"
+		let "money += 6"
+		let "xp += 3"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
-		money=$money+6
 		read q
 		sell
 	fi
@@ -672,13 +672,13 @@ function srbale() {
 		sell
 	else
 		echo Rice bale sold successfully!
-		rbale=$rbale-1
-		xp=$xp+2
+		let "rbale -= 1"
+		let "money += 12"
+		let "xp += 4"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
-		money=$money+12
 		read q
 		sell
 	fi
@@ -698,13 +698,13 @@ function sland() {
 		sell
 	else
 		echo 1 acre of land sold successfully!
-		land=$land-1
-		xp=$xp+2
+		let "land -= 1"
+		let "money += 10"
+		let "xp += 2"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
-		money=$money+10
 		read q
 		sell
 	fi
@@ -724,13 +724,13 @@ function srope() {
 		sell
 	else
 		echo Rope sold successfully!
-		ropes=$ropes-1
-		xp=$xp+2
+		let "ropes -= 1"
+		let "money += 5"
+		let "xp += 2"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
-		money=$money+5
 		read q
 		sell
 	fi
@@ -750,15 +750,15 @@ function scow() {
 		sell
 	else
 		echo Cow sold successfully!
-		cow=$cow-1
-		cpen=$cpen-1
+		let "cow -= 1"
+		let "cpen -= 1"
+		let "money += $cnet"
+		let "xp += 5"
 		co=0
-		xp=$xp+5
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
-		money=$money+$cnet
 		if [ $cpen == 0 ]; then cfat=0; fi
 		read q
 		sell
@@ -779,15 +779,15 @@ function spig() {
 		sell
 	else
 		echo Pig sold successfully!
-		pig=$pig-1
-		ppen=$ppen-1
+		let "pig -= 1"
+		let "ppen -= 1"
+		let "money += $pnet"
+		let "xp += 50"
 		pi=0
-		xp=$xp+50
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
-		money=$money+$pnet
 		if [ $ppen == 0 ]; then pfat=0; fi
 		read q
 		sell
@@ -808,11 +808,11 @@ function shorse() {
 		sell
 	else
 		echo Horse sold successfully!
-		horse=$horse-1
-		hpen=$hpen-1
+		let "horse -= 1"
+		let "hpen -= 1"
+		let "money += $hnet"
+		let "lvl += 1"
 		ho=0
-		lvl=$lvl+1
-		money=$money+$hnet
 		if [ $hpen == 0 ]; then hfat=0; fi
 		read q
 		sell
@@ -833,15 +833,15 @@ function schicken() {
 		sell
 	else
 		echo Chicken sold successfully!
-		chicken=$chicken-1
-		chpen=$chpen-1
+		let "chicken -= 1"
+		let "chpen -= 1"
+		let "money += $chnet"
+		let "xp += 2"
 		ch=0
-		xp=$xp+2
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
-		money=$money+$chnet
 		if [ $chpen == 0 ]; then chfat=0; fi
 		read q
 		sell
@@ -862,13 +862,13 @@ function scarr() {
 		sell
 	else
 		echo Carrot sold successfully!
-		carrot=$carrot-1
-		xp=$xp+3
+		let "carrot -= 1"
+		let "money += 1"
+		let "xp += 3"
 		while [ $xp -gt 100 ]; do
-			let "$lvl += 1"
-			let "$xp -= 100"
+			let "lvl += 1"
+			let "xp -= 100"
 		done
-		money=$money+1
 	fi
 	read q
 	sell
@@ -909,10 +909,10 @@ function pc() {
 	if [ $xp == 100 ]; then menu; fi
 	clear
 
-	rip=$rip+0
-	whp=$whp+0
-	plants=$whp+$rip
-	space=$land-$plants
+	let "rip += 0"
+	let "whp += 0"
+	let "plants = $whp + $rip"
+	let "space = $land - $plants"
 
 	clear
 
@@ -954,9 +954,9 @@ function pc() {
 			read q
 			pc
 		fi
-		whp=$whp+1
-		xp=$xp+2
-		wheat=$wheat-1
+		let "whp += 1"
+		let "xp += 2"
+		let "wheat -= 1"
 		echo ""
 		echo Wheat successfully planted!
 		echo ""
@@ -972,9 +972,9 @@ function pc() {
 			read q
 			pc
 		fi
-		rip=$rip+1
-		xp=$xp+2
-		rice=$rice-1
+		let "rip += 1"
+		let "xp += 2"
+		let "rice -= 1"
 		echo ""
 		echo Rice successfully planted!
 		echo ""
@@ -990,9 +990,9 @@ function pc() {
 			read q
 			pc
 		fi
-		carp=$carp+1
-		xp=$xp+2
-		carp=$carp-1
+		let "carp += 1"
+		let "xp += 2"
+		let "carrot -= 1"
 		echo ""
 		echo Carrot successfully planted!
 		echo ""
@@ -1044,16 +1044,17 @@ function hc() {
 	read -p "I want to: " hc
 	if [ $hc == "harvest" ]; then
 		if [ $tim == 3 ]; then
-			if [ $ropes -ge $whp+$rip ]; then
-				wbale=$wbale+$whp
+			let "combined = $whp + $rip"
+			if [ $ropes -ge $combined ]; then
+				let "wbale += $whp"
 				whp=0
-				rbale=$rbale+$rip
+				let "rbale += $rip"
 				rip=0
-				carrot=$carrot+$carp*2
+				let "carrot += $carp * 2"
 				carp=0
 				tim=0
-				ropes=$ropes-$whp
-				ropes=$ropes-$rip
+				let "ropes -= $whp"
+				let "ropes -= $rip"
 				echo ""
 				echo Harvest complete!
 				read q
@@ -1079,7 +1080,9 @@ function hc() {
 function wcr() {
 	topic=wc
 	if [ $xp == 100 ]; then menu; fi
-	wac=$wac+0 
+	
+	let "wac += 0"
+	
 	if [ $tim == 3 ]; then
 		clear
 		echo "	Money: \$"$money"    Name: "$player_name"    Level: "$lvl"    Exp: "$xp
@@ -1092,7 +1095,7 @@ function wcr() {
 		hc
 	fi
 
-	$wc=404
+	wc=404
 
 	clear
 	echo "	Money: \$"$money"    Name: "$player_name"    Level: "$lvl"    Exp: "$xp
@@ -1108,7 +1111,7 @@ function wcr() {
 	echo Type \'water\' to water all the crops.
 	echo Type \'back\' to go to the Farm menu.
 	echo ""
-	read wc -p "I want to: "
+	read -p "I want to: " wc
 	if [ $wc == "water" ]; then
 			echo ""
 		if [ $wac == 0 ]; then
@@ -1116,8 +1119,8 @@ function wcr() {
 			read q
 			farm
 		else
-			tim=$tim+1
-			wac=$wac-1
+			let "tim += 1"
+			let "wac -= 1"
 			echo ""
 			echo You just watered all your crops!
 			read q
@@ -1157,7 +1160,7 @@ function stable() {
 	echo "4) Chicken!"
 	echo "5) Back to Farm menu!"
 	echo ""
-	read pen -p "Choice: "
+	read -p "Choice: " pen
 	if [ $pen == 1 ]; then pig; fi
 	if [ $pen == 2 ]; then horse; fi
 	if [ $pen == 3 ]; then cow; fi
@@ -1169,7 +1172,7 @@ function stable() {
 		echo Please try again!
 		read q
 		stable
-		else
+	else
 		echo ""
 		echo Invalid entry!
 		echo Please try again!
@@ -1183,10 +1186,12 @@ function pig() {
 	po=404
 
 	topic=pig
-	pig=$pig+0
-	pnet=$pnet+0
-	pfat=$pfat+0
-	pv=$pv+0
+	
+	let "pig += 0"
+	let "pnet += 0"
+	let "pfat += 0"
+	let "pv += 0"
+	
 	if [ $pv -le 10 ]; then
 		pv=$pv+1
 	fi
@@ -1202,12 +1207,12 @@ function pig() {
 	echo ""
 	echo Type \'feed\' to feed all pigs two carrots.
 	echo Type \'back\' to return to stable.
-	read po=I want to: 
+	read -p "I want to: " po
 	if [ $po == feed ]; then
-			pigfeed=2*$pig
+		let "pigfeed = 2 * $pig"
 		if [ $carrot -ge $pigfeed ]; then
-			pfat=$pfat+5
-			carrot=$carrot-2*$pig
+			let "pfat += 5"
+			let "carrot -= 2 * $pig"
 			echo ""
 			echo Just fed all pigs!
 			read q
@@ -1233,14 +1238,18 @@ function horse() {
 	ho=404
 
 	topic=horse
-	horse=$horse+0
-	hnet=$hnet+0
-	hfat=$hfat+0
-	hv=$hv+0
+	
+	let "horse += 0"
+	let "hnet += 0"
+	let "hfat += 0"
+	let "hv += 0"
+	
 	if [ $hv -lt 20 ]; then
-		hv=$hv+1
+		let "hv += 1"
 	fi
-	hnet=$hv+$hfat
+	
+	let "hnet = $hv + $hfat"
+	
 	if [ hnet -le 1000 ]; then hnet=1000; fi
 	clear
 	echo "	Money: \$"$money"    Name: "$player_name"    Level: "$lvl"    Exp: "$xp
@@ -1252,11 +1261,11 @@ function horse() {
 	echo ""
 	echo Type \'feed\' to feed all horses one wheat bale.
 	echo Type \'back\' to return to stable.
-	read ho=I want to: 
+	read -p "I want to: " ho
 	if [ $ho == feed ]; then
 		if [ $wbale -ge $horse ]; then
-			hfat=$hfat+2
-			wbale=$wbale-$horse
+			let "hfat += 2"
+			let "wbale -= $horse"
 			echo ""
 			echo Just fed all horses!
 			read q
@@ -1282,14 +1291,18 @@ function cow() {
 	co=404
 
 	topic=cow
-	cow=$cow+0
-	cnet=$cnet+0
-	cfat=$cfat+0
-	cv=$cv+0
+	
+	let "cow += 0"
+	let "cnet += 0"
+	let "cfat += 0"
+	let "cv += 0"
+	
 	if [ $cv -lt 10 ]; then
-		cv=$cv+1
+		let "cv += 1"
 	fi
-	cnet=$cv+$cfat
+	
+	let "cnet = $cv + $cfat"
+	
 	if [ cnet -le 50 ]; then cnet=50; fi
 	clear
 	echo "	Money: \$"$money"    Name: "$player_name"    Level: "$lvl"    Exp: "$xp
@@ -1301,11 +1314,11 @@ function cow() {
 	echo ""
 	echo Type \'feed\' to feed all cows one wheat bale.
 	echo Type \'back\' to return to stable.
-	read co=I want to: 
+	read -p "I want to: " co
 	if [ $co == feed ]; then
 		if [ $wbale -ge $cow ]; then
-			cfat=$cfat+3
-			wbale=$wbale-$cow
+			let "cfat += 3"
+			let "wbale -= $cow"
 			echo ""
 			echo Just fed all cows!
 			read q
@@ -1331,14 +1344,18 @@ function chick() {
 	cho=404
 
 	topic=chick
-	chicken=$chicken+0
-	chnet=$chnet+0
-	chfat=$chfat+0
-	chv=$chv+0
+	
+	let "chicken += 0"
+	let "chnet += 0"
+	let "chfat += 0"
+	let "chv += 0"
+	
 	if [ $chv -lt 10 ]; then
-		cv=$chv+1
+		let "chv += 1"
 	fi
-	chnet=$chv+$chfat
+	
+	let "chnet = $chv + $chfat"
+	
 	if [ chnet -le 5 ]; then chnet=5; fi
 	clear
 	echo "	Money: \$"$money"    Name: "$player_name"    Level: "$lvl"    Exp: "$xp
@@ -1350,11 +1367,11 @@ function chick() {
 	echo ""
 	echo Type 'feed' to feed all chickens one wheat seed.
 	echo Type 'back' to return to stable.
-	read cho -p "I want to: "
+	read -p "I want to: " cho
 	if [ $cho == feed ]; then
 		if [ $wheat -ge $chicken ]; then
-			chfat=$chfat+3
-			wheat=$wheat-$chicken
+			let "chfat += 3"
+			let "wheat -= $chicken"
 			echo ""
 			echo Just fed all chickens!
 			read q
